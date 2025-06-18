@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progreso_test_alumnos",
+  "info": {
+    "singularName": "progreso-test-alumno",
+    "pluralName": "progreso-test-alumnos",
+    "displayName": "ProgresoTestAlumno"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "respuesta": {
+      "type": "json"
+    },
+    "calificacion": {
+      "type": "decimal"
+    },
+    "feedback": {
+      "type": "richtext"
+    },
+    "estado": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Pendiente",
+        "Enviado",
+        "Calificado"
+      ]
+    }
+  }
+}

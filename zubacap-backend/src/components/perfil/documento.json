@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_perfil_documentos",
+  "info": {
+    "displayName": "Documento",
+    "icon": "file"
+  },
+  "options": {},
+  "attributes": {
+    "nombreDocumento": {
+      "type": "string",
+      "required": true
+    },
+    "archivo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "fechaCaducidad": {
+      "type": "date"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codigo_invitacions",
+  "info": {
+    "singularName": "codigo-invitacion",
+    "pluralName": "codigo-invitacions",
+    "displayName": "CodigoInvitacion"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "codigo": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "usosMaximos": {
+      "type": "integer",
+      "required": true
+    },
+    "usosActuales": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    }
+  }
+}

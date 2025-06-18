@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progreso_leccions",
+  "info": {
+    "singularName": "progreso-leccion",
+    "pluralName": "progreso-leccions",
+    "displayName": "ProgresoLeccion"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "estado": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "NoIniciado",
+        "Completado"
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_test_alternativas",
+  "info": {
+    "displayName": "Alternativa",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "Texto": {
+      "type": "string",
+      "required": true
+    },
+    "esCorrecta": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "config": {}
+}
