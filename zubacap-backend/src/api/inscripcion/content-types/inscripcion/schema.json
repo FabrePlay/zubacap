@@ -29,6 +29,12 @@
     },
     "urlCertificado": {
       "type": "string"
+    },
+    "alumno": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "inscripciones"
     }
   }
 }

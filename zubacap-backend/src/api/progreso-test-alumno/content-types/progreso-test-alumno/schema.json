@@ -28,6 +28,18 @@
         "Enviado",
         "Calificado"
       ]
+    },
+    "alumno": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "progresos_test"
+    },
+    "test": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::test.test",
+      "inversedBy": "progresos_alumnos"
     }
   }
 }

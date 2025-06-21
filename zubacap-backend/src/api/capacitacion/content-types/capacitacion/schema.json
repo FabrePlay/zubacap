@@ -58,6 +58,44 @@
       "type": "boolean",
       "required": true,
       "default": false
+    },
+    "instructores": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "capacitaciones_como_instructor"
+    },
+    "supervisores": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "capacitaciones_como_supervisor"
+    },
+    "inscripciones": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inscripcion.inscripcion"
+    },
+    "modulos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::modulo.modulo"
+    },
+    "tests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::test.test"
+    },
+    "anuncios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::anuncio.anuncio"
+    },
+    "codigos_invitacion": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::codigo-invitacion.codigo-invitacion",
+      "mappedBy": "capacitacion"
     }
   }
 }

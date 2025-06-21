@@ -17,6 +17,17 @@
     },
     "instrucciones": {
       "type": "richtext"
+    },
+    "preguntas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::pregunta.pregunta"
+    },
+    "progresos_alumnos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::progreso-test-alumno.progreso-test-alumno",
+      "mappedBy": "test"
     }
   }
 }

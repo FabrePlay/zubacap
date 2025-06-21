@@ -17,6 +17,11 @@
     },
     "orden": {
       "type": "integer"
+    },
+    "lecciones": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::leccion.leccion"
     }
   }
 }

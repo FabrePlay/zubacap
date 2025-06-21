@@ -33,6 +33,12 @@
         "videos",
         "audios"
       ]
+    },
+    "progresos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::progreso-leccion.progreso-leccion",
+      "mappedBy": "leccion"
     }
   }
 }

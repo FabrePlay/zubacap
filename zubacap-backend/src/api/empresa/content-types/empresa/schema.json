@@ -31,6 +31,22 @@
     },
     "contactoEmail": {
       "type": "email"
+    },
+    "capacitaciones": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::capacitacion.capacitacion"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "codigos_invitacion": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::codigo-invitacion.codigo-invitacion",
+      "mappedBy": "empresa"
     }
   }
 }

@@ -24,6 +24,18 @@
       "type": "integer",
       "required": true,
       "default": 0
+    },
+    "capacitacion": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::capacitacion.capacitacion",
+      "inversedBy": "codigos_invitacion"
+    },
+    "empresa": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::empresa.empresa",
+      "inversedBy": "codigos_invitacion"
     }
   }
 }

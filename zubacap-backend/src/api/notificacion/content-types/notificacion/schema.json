@@ -27,6 +27,12 @@
         "Nuevo_Contenido",
         "Anuncio_General"
       ]
+    },
+    "usuario_destino": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notificaciones"
     }
   }
 }

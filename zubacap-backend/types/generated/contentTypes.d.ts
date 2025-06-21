@@ -414,6 +414,11 @@ export interface ApiCapacitacionCapacitacion
     draftAndPublish: true;
   };
   attributes: {
+    anuncios: Schema.Attribute.Relation<'oneToMany', 'api::anuncio.anuncio'>;
+    codigos_invitacion: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::codigo-invitacion.codigo-invitacion'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -427,17 +432,31 @@ export interface ApiCapacitacionCapacitacion
     imagenPortada: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    inscripciones: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::inscripcion.inscripcion'
+    >;
+    instructores: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::capacitacion.capacitacion'
     > &
       Schema.Attribute.Private;
+    modulos: Schema.Attribute.Relation<'oneToMany', 'api::modulo.modulo'>;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
     ofreceCertificado: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
+    supervisores: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    tests: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -460,12 +479,17 @@ export interface ApiCodigoInvitacionCodigoInvitacion
     draftAndPublish: true;
   };
   attributes: {
+    capacitacion: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::capacitacion.capacitacion'
+    >;
     codigo: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    empresa: Schema.Attribute.Relation<'manyToOne', 'api::empresa.empresa'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -494,6 +518,14 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    capacitaciones: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::capacitacion.capacitacion'
+    >;
+    codigos_invitacion: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::codigo-invitacion.codigo-invitacion'
+    >;
     contactoEmail: Schema.Attribute.Email;
     contactoNombre: Schema.Attribute.String;
     contactoTelefono: Schema.Attribute.String;
@@ -515,6 +547,10 @@ export interface ApiEmpresaEmpresa extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -529,6 +565,10 @@ export interface ApiInscripcionInscripcion extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    alumno: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -574,6 +614,10 @@ export interface ApiLeccionLeccion extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     orden: Schema.Attribute.Integer;
+    progresos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progreso-leccion.progreso-leccion'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     recursos_adjuntos: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
@@ -601,6 +645,7 @@ export interface ApiModuloModulo extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    lecciones: Schema.Attribute.Relation<'oneToMany', 'api::leccion.leccion'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -647,6 +692,10 @@ export interface ApiNotificacionNotificacion
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    usuario_destino: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -691,11 +740,16 @@ export interface ApiProgresoLeccionProgresoLeccion
     draftAndPublish: true;
   };
   attributes: {
+    alumno: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     estado: Schema.Attribute.Enumeration<['NoIniciado', 'Completado']> &
       Schema.Attribute.Required;
+    leccion: Schema.Attribute.Relation<'manyToOne', 'api::leccion.leccion'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -721,6 +775,10 @@ export interface ApiProgresoTestAlumnoProgresoTestAlumno
     draftAndPublish: true;
   };
   attributes: {
+    alumno: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     calificacion: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -738,6 +796,7 @@ export interface ApiProgresoTestAlumnoProgresoTestAlumno
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     respuesta: Schema.Attribute.JSON;
+    test: Schema.Attribute.Relation<'manyToOne', 'api::test.test'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -762,6 +821,11 @@ export interface ApiTestTest extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::test.test'> &
       Schema.Attribute.Private;
+    preguntas: Schema.Attribute.Relation<'oneToMany', 'api::pregunta.pregunta'>;
+    progresos_alumnos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progreso-test-alumno.progreso-test-alumno'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     titulo: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -1225,10 +1289,17 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    capacitaciones_como_instructor: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::capacitacion.capacitacion'
+    >;
+    capacitaciones_como_supervisor: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::capacitacion.capacitacion'
+    >;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1239,17 +1310,33 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    inscripciones: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::inscripcion.inscripcion'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    notificaciones: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notificacion.notificacion'
+    >;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    progresos_leccion: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progreso-leccion.progreso-leccion'
+    >;
+    progresos_test: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progreso-test-alumno.progreso-test-alumno'
+    >;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;

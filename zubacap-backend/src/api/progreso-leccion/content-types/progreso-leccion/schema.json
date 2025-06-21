@@ -18,6 +18,18 @@
         "NoIniciado",
         "Completado"
       ]
+    },
+    "alumno": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "progresos_leccion"
+    },
+    "leccion": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::leccion.leccion",
+      "inversedBy": "progresos"
     }
   }
 }
