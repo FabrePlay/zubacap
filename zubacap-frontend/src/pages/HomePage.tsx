@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, BookOpen, Users, Award, Target, CheckCircle, Star } from 'lucide-react'
+import { ArrowRight, BookOpen, Users, Award, Target, CheckCircle, Star, Mail, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
